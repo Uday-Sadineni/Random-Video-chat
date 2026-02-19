@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+    <head>
+        <title>clone for omegle</title>
+    </head>
+    <body>
+        <h2>clone for omegle</h2>
+
+        <div class="videos">
+            <video id="localVideo" autoplay muted playsinline></video>
+            <video id="remoteVideo" autoplay playsinline></video>
+            <br /><br />
+            <button id="callBtn">Start Call</button>
+        </div>
+        <div class="chat_section">
+            <div id="chatbox"></div>
+            <input type="text" id="msginput" />
+            <button id="send">Send</button>
+        </div>
+        <script src="https://unpkg.com/simple-peer/simplepeer.min.js"></script>
+        <script src="app.js"></script>
+    </body>
+</html>
