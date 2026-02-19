@@ -1,4 +1,4 @@
-const socket = new WebSocket("ws://192.168.0.107:3000");
+const socket = new WebSocket("wss://random-video-chat-uj67.onrender.com");
 
 const localVideo = document.getElementById("localVideo");
 const remoteVideo = document.getElementById("remoteVideo");
