@@ -1,11 +1,17 @@
-const socket = new WebSocket("wss://random-video-chat-uj67.onrender.com");
+const socket = io("http://random-video-chat-uj67.onrender.com");
 
+// from index.html
+const onlineNumber = document.getElementById("onlineNumber");
 const localVideo = document.getElementById("localVideo");
 const remoteVideo = document.getElementById("remoteVideo");
 const callBtn = document.getElementById("callBtn");
 const send = document.getElementById("send");
 const chatbox = document.getElementById("chatbox");
 const msginput = document.getElementById("msginput");
+
+socket.on("connect", () => {
+  console.log("connected sucess");
+});
 
 let localStream;
 let peer;
@@ -25,16 +31,19 @@ function startCall() {
   });
 
   peer.on("signal", (data) => {
-    socket.send(JSON.stringify(data));
+    console.log("signal sent");
+    socket.emit("stream", JSON.stringify(data));
   });
 
   peer.on("stream", (stream) => {
+    console.log("stream sent");
     remoteVideo.srcObject = stream;
   });
 }
 
-socket.onmessage = (event) => {
-  const signal = JSON.parse(event.data);
+socket.on("stream", (data) => {
+  const signal = JSON.parse(data);
+  console.log("stream recieved:", data);
   if (!peer) {
     peer = new SimplePeer({
       initiator: false,
@@ -42,14 +51,32 @@ socket.onmessage = (event) => {
       stream: localStream,
     });
     peer.on("signal", (data) => {
-      socket.send(JSON.stringify(data));
+      console.log("signal rec");
+      socket.emit("stream", JSON.stringify(data));
     });
 
     peer.on("stream", (stream) => {
+      console.log("stream rec");
       remoteVideo.srcObject = stream;
     });
   }
   peer.signal(signal);
-};
+});
 
-callBtn.onclick = () => startCall();
+socket.on("Message", (data) => {
+  const msg = document.createElement("p");
+  msg.textContent = "Friend: " + data;
+  chatbox.appendChild(msg);
+});
+
+callBtn.addEventListener("click", () => {
+  startCall();
+});
+
+send.addEventListener("click", () => {
+  socket.emit("Message", msginput.value);
+  const msg = document.createElement("p");
+  msg.textContent = "You: " + msginput.value;
+  chatbox.appendChild(msg);
+  msginput.value = "";
+});

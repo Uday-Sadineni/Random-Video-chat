@@ -5,6 +5,7 @@
     </head>
     <body>
         <h2>clone for omegle</h2>
+        <h5>online : <span id="onlineNumber"></span></h5>
 
         <div class="videos">
             <video id="localVideo" autoplay muted playsinline></video>
@@ -17,6 +18,8 @@
             <input type="text" id="msginput" />
             <button id="send">Send</button>
         </div>
+        <link rel="stylesheet" href="app.css" />
+        <script src="http://localhost:3000/socket.io/socket.io.js"></script>
         <script src="https://unpkg.com/simple-peer/simplepeer.min.js"></script>
         <script src="app.js"></script>
     </body>
