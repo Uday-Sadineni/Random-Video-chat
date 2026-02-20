@@ -1,4 +1,4 @@
-const socket = io("http://random-video-chat-uj67.onrender.com");
+const socket = io("https://backend-for-video-chat-0no3.onrender.com");
 
 // from index.html
 const onlineNumber = document.getElementById("onlineNumber");
