@@ -28,6 +28,17 @@ function startCall() {
     initiator: true,
     trickle: false,
     stream: localStream,
+    config: {
+    iceServers: [
+      { urls: 'stun:stun.l.google.com:19302' },
+
+      {
+        urls: "turn:global.relay.metered.ca:80",
+        username: "0ef56eba9caa53933b8c24fd",
+        credential: "nOV/VnFdXXM9u+4j",
+      }
+    ]
+  }
   });
 
   peer.on("signal", (data) => {
