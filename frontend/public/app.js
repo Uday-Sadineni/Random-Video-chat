@@ -34,8 +34,8 @@ function startCall() {
 
       {
         urls: "turn:global.relay.metered.ca:80",
-        username: "0ef56eba9caa53933b8c24fd",
-        credential: "nOV/VnFdXXM9u+4j",
+        username: "test@123",
+        credential: "test@123",
       }
     ]
   }
